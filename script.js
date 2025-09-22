@@ -137,9 +137,8 @@ function setHtmlQuestion(questionIndex) {
                                         <div class="question">${themeQuestions[questionIndex].question}</div>
                                         <div id="options-container">`
     themeQuestions[questionIndex].options.forEach((option) => {
-        const isCorrect = themeQuestions[questionIndex].answers.includes(option) ? 'correct' : '';
 
-        questionHtml += `<label class="option ${isCorrect}" onclick="enableNextButton()">
+        questionHtml += `<label class="option" onclick="enableNextButton()">
                         <input type="checkbox" value="${option}">
                         ${option}
                     </label>`;
