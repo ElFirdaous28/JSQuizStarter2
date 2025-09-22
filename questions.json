@@ -1,0 +1,396 @@
+{
+    "themes": [
+        {
+            "theme": "JavaScript Basics",
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "Which keyword is used to declare a variable in JavaScript?",
+                    "options": [
+                        "var",
+                        "let",
+                        "const",
+                        "all of the above"
+                    ],
+                    "answers": [
+                        "all of the above"
+                    ]
+                },
+                {
+                    "id": 2,
+                    "question": "What is the correct way to write a single-line comment?",
+                    "options": [
+                        "// comment",
+                        "/* comment */"
+                    ],
+                    "answers": [
+                        "// comment"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "question": "Which operator is used for strict equality comparison?",
+                    "options": [
+                        "==",
+                        "===",
+                        "!=",
+                        "="
+                    ],
+                    "answers": [
+                        "==="
+                    ]
+                },
+                {
+                    "id": 4,
+                    "question": "What is the default value of an uninitialized variable?",
+                    "options": [
+                        "undefined",
+                        "null",
+                        "0"
+                    ],
+                    "answers": [
+                        "undefined"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "question": "Which method prints output to the console?",
+                    "options": [
+                        "console.log()",
+                        "print()",
+                        "alert()"
+                    ],
+                    "answers": [
+                        "console.log()"
+                    ]
+                },
+                {
+                    "id": 6,
+                    "question": "Which of these are primitive data types in JavaScript?",
+                    "options": [
+                        "string",
+                        "number",
+                        "boolean",
+                        "object"
+                    ],
+                    "answers": [
+                        "string",
+                        "number",
+                        "boolean"
+                    ]
+                },
+                {
+                    "id": 7,
+                    "question": "Which function converts a string to an integer?",
+                    "options": [
+                        "parseInt()",
+                        "parseFloat()",
+                        "Number()"
+                    ],
+                    "answers": [
+                        "parseInt()"
+                    ]
+                },
+                {
+                    "id": 8,
+                    "question": "What will typeof null return?",
+                    "options": [
+                        "object",
+                        "null",
+                        "undefined"
+                    ],
+                    "answers": [
+                        "object"
+                    ]
+                },
+                {
+                    "id": 9,
+                    "question": "Which of these is a JavaScript framework?",
+                    "options": [
+                        "React",
+                        "Laravel",
+                        "Django",
+                        "Flask"
+                    ],
+                    "answers": [
+                        "React"
+                    ]
+                },
+                {
+                    "id": 10,
+                    "question": "Which of the following are ways to declare functions?",
+                    "options": [
+                        "function myFunc() {}",
+                        "() => {}",
+                        "class MyClass { method() {} }",
+                        "for (let i=0; i<1; i++) {}"
+                    ],
+                    "answers": [
+                        "function myFunc() {}",
+                        "() => {}"
+                    ]
+                }
+            ]
+        },
+        {
+            "theme": "DOM & Events",
+            "questions": [
+                {
+                    "id": 11,
+                    "question": "Which method selects an element by its ID?",
+                    "options": [
+                        "getElementById()",
+                        "querySelector()",
+                        "getElementsByClassName()"
+                    ],
+                    "answers": [
+                        "getElementById()"
+                    ]
+                },
+                {
+                    "id": 12,
+                    "question": "Which event occurs when a user clicks an element?",
+                    "options": [
+                        "onclick",
+                        "onhover",
+                        "onsubmit"
+                    ],
+                    "answers": [
+                        "onclick"
+                    ]
+                },
+                {
+                    "id": 13,
+                    "question": "Which method adds a new child element to the DOM?",
+                    "options": [
+                        "appendChild()",
+                        "insertBefore()",
+                        "removeChild()"
+                    ],
+                    "answers": [
+                        "appendChild()"
+                    ]
+                },
+                {
+                    "id": 14,
+                    "question": "Which property changes the inner text of an element?",
+                    "options": [
+                        "innerText",
+                        "textContent",
+                        "innerHTML"
+                    ],
+                    "answers": [
+                        "innerText"
+                    ]
+                },
+                {
+                    "id": 15,
+                    "question": "Which method can remove an element from the DOM?",
+                    "options": [
+                        "remove()",
+                        "delete()",
+                        "removeChild()"
+                    ],
+                    "answers": [
+                        "remove()"
+                    ]
+                },
+                {
+                    "id": 16,
+                    "question": "Which of the following are ways to select multiple elements?",
+                    "options": [
+                        "getElementsByClassName()",
+                        "querySelectorAll()",
+                        "getElementById()"
+                    ],
+                    "answers": [
+                        "getElementsByClassName()",
+                        "querySelectorAll()"
+                    ]
+                },
+                {
+                    "id": 17,
+                    "question": "Which event is triggered when an input value changes?",
+                    "options": [
+                        "onchange",
+                        "oninput",
+                        "onclick",
+                        "onsubmit"
+                    ],
+                    "answers": [
+                        "onchange"
+                    ]
+                },
+                {
+                    "id": 18,
+                    "question": "Which method sets an attribute on an HTML element?",
+                    "options": [
+                        "setAttribute()",
+                        "getAttribute()",
+                        "removeAttribute()"
+                    ],
+                    "answers": [
+                        "setAttribute()"
+                    ]
+                },
+                {
+                    "id": 19,
+                    "question": "Which of the following events bubble up the DOM tree?",
+                    "options": [
+                        "click",
+                        "focus",
+                        "mouseenter",
+                        "load"
+                    ],
+                    "answers": [
+                        "click",
+                        "load"
+                    ]
+                },
+                {
+                    "id": 20,
+                    "question": "Which method replaces an existing child element with a new one?",
+                    "options": [
+                        "replaceChild()",
+                        "appendChild()",
+                        "insertBefore()"
+                    ],
+                    "answers": [
+                        "replaceChild()"
+                    ]
+                }
+            ]
+        },
+        {
+            "theme": "Objects & Arrays",
+            "questions": [
+                {
+                    "id": 21,
+                    "question": "Which method adds one or more elements to the end of an array?",
+                    "options": [
+                        "push()",
+                        "pop()",
+                        "shift()",
+                        "unshift()"
+                    ],
+                    "answers": [
+                        "push()"
+                    ]
+                },
+                {
+                    "id": 22,
+                    "question": "Which method removes the first element from an array?",
+                    "options": [
+                        "shift()",
+                        "pop()",
+                        "splice()",
+                        "slice()"
+                    ],
+                    "answers": [
+                        "shift()"
+                    ]
+                },
+                {
+                    "id": 23,
+                    "question": "Which method creates a new array by transforming each element?",
+                    "options": [
+                        "map()",
+                        "filter()",
+                        "reduce()"
+                    ],
+                    "answers": [
+                        "map()"
+                    ]
+                },
+                {
+                    "id": 24,
+                    "question": "Which method filters elements that meet a condition?",
+                    "options": [
+                        "filter()",
+                        "map()",
+                        "forEach()",
+                        "find()"
+                    ],
+                    "answers": [
+                        "filter()"
+                    ]
+                },
+                {
+                    "id": 25,
+                    "question": "Which method reduces an array to a single value?",
+                    "options": [
+                        "reduce()",
+                        "map()",
+                        "filter()"
+                    ],
+                    "answers": [
+                        "reduce()"
+                    ]
+                },
+                {
+                    "id": 26,
+                    "question": "Which syntax creates a new object?",
+                    "options": [
+                        "let obj = {}",
+                        "let obj = []",
+                        "let obj = Object()"
+                    ],
+                    "answers": [
+                        "let obj = {}",
+                        "let obj = Object()"
+                    ]
+                },
+                {
+                    "id": 27,
+                    "question": "Which operator can clone an array or object?",
+                    "options": [
+                        "spread operator (...)",
+                        "assignment (=)",
+                        "destructuring"
+                    ],
+                    "answers": [
+                        "spread operator (...)"
+                    ]
+                },
+                {
+                    "id": 28,
+                    "question": "Which method returns the keys of an object?",
+                    "options": [
+                        "Object.keys()",
+                        "Object.values()",
+                        "Object.entries()"
+                    ],
+                    "answers": [
+                        "Object.keys()"
+                    ]
+                },
+                {
+                    "id": 29,
+                    "question": "Which method merges two or more arrays?",
+                    "options": [
+                        "concat()",
+                        "push()",
+                        "merge()",
+                        "splice()"
+                    ],
+                    "answers": [
+                        "concat()"
+                    ]
+                },
+                {
+                    "id": 30,
+                    "question": "Which of these are valid ways to access object properties?",
+                    "options": [
+                        "obj.key",
+                        "obj['key']",
+                        "obj(key)"
+                    ],
+                    "answers": [
+                        "obj.key",
+                        "obj['key']"
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSQuizStarter</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            gap: 0 !important;
+        }
+
+        #theme-name {
+            color: #16325B;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 id="theme-name">JavaScript Theme</h1>
+
+    <div class="quiz-container">
+        <div class="quiz">
+            <div class="timer">
+                <span id="timer">00:10</span>
+                <span>Seconds</span>
+            </div>
+
+            <div id="question-details">
+                <!-- <div class="question-number">Question <span id="question-number">1/10</span></div>
+                <div class="question">Which JavaScript method is used to remove the last element from an array?</div>
+                <div id="options-container">
+                    <label class="option">
+                        <input type="checkbox" name="q1" value="option1">
+                        The cat jumped over the fence.
+                    </label>
+                    <label class="option">
+                        <input type="checkbox" name="q1" value="option2">
+                        She quickly finished her morning coffee.
+                    </label>
+                    <label class="option">
+                        <input type="checkbox" name="q1" value="option3">
+                        Learning JavaScript can be really fun.
+                    </label>
+                    <label class="option">
+                        <input type="checkbox" name="q1" value="option4">
+                        Birds are singing in the garden.
+                    </label>
+                </div> -->
+            </div>
+
+            <div class="buttons">
+                <button id="stop-test">Stop</button>
+                <button id="next-question" disabled onclick="goToNext()">Next</button>
+                <button id="see-results" onclick="seeResults()">See Results</button>
+            </div>
+
+            <div id="quiz-note">
+                <span id="note">Note :</span> A Question may have one correct answer or more
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSQuizStarter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="home-container">
+        <div class="js-container">
+            <!-- JS -->
+        </div>
+        <div class="start-container">
+            <h1>How well do you know <span id="javascript">JavaScript?</span></h1>
+        </div>
+    </div>
+    <div class="login-box">
+        <form class="username-form" onsubmit="return initializeUserInfos(event)">
+            <div class="username-container">
+                <label for="username-input">Choose a Username:</label>
+                <input id="username-input" type="text">
+                <small id="username-error"></small>
+            </div>
+            <div class="buttons-container">
+                <button type="submit" class="quiz-button start-quiz">
+                    Start Quiz
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

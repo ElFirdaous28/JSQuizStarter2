@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSQuizStarter Result</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+
+<body>
+    <div class="home-container result-container">
+        <div class="header-buttons">
+            <a href="thems.html" id="take-a-quiz">Take a Quiz</a>
+            <button id="download-button">Download Report</button>
+        </div>
+
+        <div id="content-to-download" style="width: 100%;">
+            <div>
+                <h1>Quiz Result :</h1>
+            </div>
+            <!-- boxes -->
+            <div class="result-boxes">
+                <div class="box correct-answers">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+                            color="#f0b84e" class="lucide lucide-check-icon lucide-check">
+                            <path d="M20 6 9 17l-5-5" />
+                        </svg>
+                    </div>
+                    <p>Correct Answers</p>
+                    <p><span id="nbr-correct"></span>/10</p>
+                </div>
+                <div class="box incorrect-answers">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+                            color="#f0b84e" class="lucide lucide-x-icon lucide-x">
+                            <path d="M18 6 6 18" />
+                            <path d="m6 6 12 12" />
+                        </svg>
+                    </div>
+                    <p>Incorrect Answers</p>
+                    <p><span id="nbr_incorrect"></span>/10</p>
+                </div>
+                <div class="box time">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+                            color="#f0b84e" class="lucide lucide-clock-icon lucide-clock">
+                            <path d="M12 6v6l4 2" />
+                            <circle cx="12" cy="12" r="10" />
+                        </svg>
+                    </div>
+                    <p>Correct Answers</p>
+                    <p><span id="resolution-time"></span>seconds</p>
+                </div>
+            </div>
+
+            <!-- ============ quiz feedback ============== -->
+            <div class="quiz-feedback">
+                <h1>Quiz Feedback</h1>
+
+                <div id="questions-container">
+                    <!-- example of questoin -->
+                    <!-- <div class="question-feedback-box">
+                    <h2>Question 1</h2>
+                    <p>Que signifie le mot 'rapidement' ?</p>
+
+                    <div id="options-container">
+                        <div class="feedback-option">Sans effort</div>
+                        <div class="feedback-option">Sans effort</div>
+                        <div class="feedback-option">Sans effort</div>
+                        <div class="feedback-option">Sans effort</div>
+                    </div>
+                    <div class="correct-or-not{}-container">
+                        <div class="correct-or-not ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-check-icon lucide-check">
+                                <path d="M20 6 9 17l-5-5" />
+                            </svg>
+                            <span>Correct</span>
+                        </div>
+
+                    </div>
+                </div> -->
+                </div>
+            </div>
+
+        </div>
+
+        <!-- <div style="width: 50%;">
+            <button id="see-more-button">See More</button>
+        </div> -->
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</body>
+
+</html>

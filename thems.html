@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Quiz Themes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="main-header">
+        <h1>Choose a <span id="javascript-theme">JavaScript Theme</span></h1>
+    </div>
+
+    <div class="themes-container">
+        <!-- JavaScript Basics Theme -->
+        <div class="theme-box">
+            <div class="theme-header">
+                <div class="js-icon">JS</div>
+                <h3 class="theme-title">JavaScript Basics</h3>
+            </div>
+            <div class="buttons-container">
+                <a href="quiz.html" onclick="saveChoosedTheme('JavaScript Basics')" class="quiz-button start-quiz">Start
+                    Quiz</a>
+                <a href="results.html" class="quiz-button see-result">See Results</a>
+            </div>
+        </div>
+
+        <!-- DOM & Events Theme -->
+        <div class="theme-box">
+            <div class="theme-header">
+                <div class="js-icon">JS</div>
+                <h3 class="theme-title">DOM & Events</h3>
+            </div>
+            <div class="buttons-container">
+                <a href="quiz.html" onclick="saveChoosedTheme('DOM & Events')" class="quiz-button start-quiz">Start
+                    Quiz</a>
+                <a href="results.html" class="quiz-button see-result">See Results</a>
+            </div>
+        </div>
+
+        <!-- Objects & Arrays Theme -->
+        <div class="theme-box">
+            <div class="theme-header">
+                <div class="js-icon">JS</div>
+                <h3 class="theme-title">Objects & Arrays</h3>
+            </div>
+            <div class="buttons-container">
+                <a href="quiz.html" onclick="saveChoosedTheme('Objects & Arrays')" class="quiz-button start-quiz">Start
+                    Quiz</a>
+                <a href="results.html" class="quiz-button see-result">See Results</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
