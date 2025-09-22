@@ -1,0 +1,129 @@
+{
+    "theme": "DOM & Events",
+    "questions": [
+        {
+            "id": 11,
+            "question": "Which method selects an element by its ID?",
+            "options": [
+                "getElementById()",
+                "querySelector()",
+                "getElementsByClassName()"
+            ],
+            "answers": [
+                "getElementById()"
+            ]
+        },
+        {
+            "id": 12,
+            "question": "Which event occurs when a user clicks an element?",
+            "options": [
+                "onclick",
+                "onhover",
+                "onsubmit"
+            ],
+            "answers": [
+                "onclick"
+            ]
+        },
+        {
+            "id": 13,
+            "question": "Which method adds a new child element to the DOM?",
+            "options": [
+                "appendChild()",
+                "insertBefore()",
+                "removeChild()"
+            ],
+            "answers": [
+                "appendChild()"
+            ]
+        },
+        {
+            "id": 14,
+            "question": "Which property changes the inner text of an element?",
+            "options": [
+                "innerText",
+                "textContent",
+                "innerHTML"
+            ],
+            "answers": [
+                "innerText"
+            ]
+        },
+        {
+            "id": 15,
+            "question": "Which method can remove an element from the DOM?",
+            "options": [
+                "remove()",
+                "delete()",
+                "removeChild()"
+            ],
+            "answers": [
+                "remove()"
+            ]
+        },
+        {
+            "id": 16,
+            "question": "Which of the following are ways to select multiple elements?",
+            "options": [
+                "getElementsByClassName()",
+                "querySelectorAll()",
+                "getElementById()"
+            ],
+            "answers": [
+                "getElementsByClassName()",
+                "querySelectorAll()"
+            ]
+        },
+        {
+            "id": 17,
+            "question": "Which event is triggered when an input value changes?",
+            "options": [
+                "onchange",
+                "oninput",
+                "onclick",
+                "onsubmit"
+            ],
+            "answers": [
+                "onchange"
+            ]
+        },
+        {
+            "id": 18,
+            "question": "Which method sets an attribute on an HTML element?",
+            "options": [
+                "setAttribute()",
+                "getAttribute()",
+                "removeAttribute()"
+            ],
+            "answers": [
+                "setAttribute()"
+            ]
+        },
+        {
+            "id": 19,
+            "question": "Which of the following events bubble up the DOM tree?",
+            "options": [
+                "click",
+                "focus",
+                "mouseenter",
+                "load"
+            ],
+            "answers": [
+                "click",
+                "load"
+            ]
+        },
+        {
+            "id": 20,
+            "question": "Which method replaces an existing child element with a new one?",
+            "options": [
+                "replaceChild()",
+                "appendChild()",
+                "insertBefore()"
+            ],
+            "answers": [
+                "replaceChild()"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,132 @@
+{
+    "theme": "JavaScript Basics",
+    "questions": [
+        {
+            "id": 1,
+            "question": "Which keyword is used to declare a variable in JavaScript?",
+            "options": [
+                "var",
+                "let",
+                "const",
+                "all of the above"
+            ],
+            "answers": [
+                "all of the above"
+            ]
+        },
+        {
+            "id": 2,
+            "question": "What is the correct way to write a single-line comment?",
+            "options": [
+                "// comment",
+                "/* comment */"
+            ],
+            "answers": [
+                "// comment"
+            ]
+        },
+        {
+            "id": 3,
+            "question": "Which operator is used for strict equality comparison?",
+            "options": [
+                "==",
+                "===",
+                "!=",
+                "="
+            ],
+            "answers": [
+                "==="
+            ]
+        },
+        {
+            "id": 4,
+            "question": "What is the default value of an uninitialized variable?",
+            "options": [
+                "undefined",
+                "null",
+                "0"
+            ],
+            "answers": [
+                "undefined"
+            ]
+        },
+        {
+            "id": 5,
+            "question": "Which method prints output to the console?",
+            "options": [
+                "console.log()",
+                "print()",
+                "alert()"
+            ],
+            "answers": [
+                "console.log()"
+            ]
+        },
+        {
+            "id": 6,
+            "question": "Which of these are primitive data types in JavaScript?",
+            "options": [
+                "string",
+                "number",
+                "boolean",
+                "object"
+            ],
+            "answers": [
+                "string",
+                "number",
+                "boolean"
+            ]
+        },
+        {
+            "id": 7,
+            "question": "Which function converts a string to an integer?",
+            "options": [
+                "parseInt()",
+                "parseFloat()",
+                "Number()"
+            ],
+            "answers": [
+                "parseInt()"
+            ]
+        },
+        {
+            "id": 8,
+            "question": "What will typeof null return?",
+            "options": [
+                "object",
+                "null",
+                "undefined"
+            ],
+            "answers": [
+                "object"
+            ]
+        },
+        {
+            "id": 9,
+            "question": "Which of these is a JavaScript framework?",
+            "options": [
+                "React",
+                "Laravel",
+                "Django",
+                "Flask"
+            ],
+            "answers": [
+                "React"
+            ]
+        },
+        {
+            "id": 10,
+            "question": "Which of the following are ways to declare functions?",
+            "options": [
+                "function myFunc() {}",
+                "() => {}",
+                "class MyClass { method() {} }",
+                "for (let i=0; i<1; i++) {}"
+            ],
+            "answers": [
+                "function myFunc() {}",
+                "() => {}"
+            ]
+        }
+    ]
+}
