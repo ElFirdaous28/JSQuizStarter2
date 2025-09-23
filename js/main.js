@@ -1,5 +1,8 @@
 import { getUsernameInput, showError, hideError, getStartQuizButtons } from './ui.js';
 import { saveUser, saveChoosedTheme } from './storage.js';
+import { loadQuestions } from './question.js';
+
+let chosedTheme = localStorage.getItem('selectedTheme');
 
 function initializeUserInfos(event) {
     event.preventDefault();
@@ -22,14 +25,24 @@ function initializeUserInfos(event) {
 document.addEventListener('DOMContentLoaded', () => {
     const pageId = document.body.id;
 
+    // index page
     if (pageId === 'index-page') {
         document.getElementById("username-form").addEventListener("submit", initializeUserInfos);
     }
+
+    // themes page
     else if (pageId === 'themes-page') {
         const startQuizButtons = getStartQuizButtons();
         startQuizButtons.forEach(element => {
-
-            element.addEventListener("click", () => saveChoosedTheme(element.getAttribute('data-theme')));
+            element.addEventListener("click", () => {
+                saveChoosedTheme(element.getAttribute('data-theme'));
+                window.location.href = "quiz.html";
+            })
         });
+    }
+
+    // quiz page
+    else if (pageId === 'quiz-page') {
+        loadQuestions(chosedTheme);
     }
 });
