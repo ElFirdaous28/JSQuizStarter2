@@ -1,6 +1,6 @@
 let questions = {};
 
-async function loadQuestions() {
+async function fetchQuestions() {
     try {
         const response = await fetch('questions.json');
         const data = await response.json();
@@ -112,7 +112,7 @@ function stopTimer() {
 
 // initialize the quiz
 document.addEventListener('DOMContentLoaded', async () => {
-    await loadQuestions();
+    await fetchQuestions();
 
     // start the quiz
     themeQuestions = questions[selectedTheme];
