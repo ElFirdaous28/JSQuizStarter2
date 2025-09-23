@@ -17,3 +17,7 @@ export function saveUser(username) {
 export function getUsers() {
     return JSON.parse(localStorage.getItem("users")) || {};
 }
+
+export function saveChoosedTheme(choice) {
+    localStorage.setItem("selectedTheme", choice);
+}

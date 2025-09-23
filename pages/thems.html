@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JavaScript Quiz Themes</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 
-<body>
+<body id="themes-page">
     <div class="main-header">
         <h1>Choose a <span id="javascript-theme">JavaScript Theme</span></h1>
     </div>
@@ -21,9 +21,9 @@
                 <h3 class="theme-title">JavaScript Basics</h3>
             </div>
             <div class="buttons-container">
-                <a href="quiz.html" onclick="saveChoosedTheme('JavaScript Basics')" class="quiz-button start-quiz">Start
-                    Quiz</a>
-                <a href="results.html" class="quiz-button see-result">See Results</a>
+                <button data-theme="javascript-basics" class="quiz-button start-quiz">Start
+                    Quiz</button>
+                <button class="quiz-button see-result">See Results</button>
             </div>
         </div>
 
@@ -34,9 +34,9 @@
                 <h3 class="theme-title">DOM & Events</h3>
             </div>
             <div class="buttons-container">
-                <a href="quiz.html" onclick="saveChoosedTheme('DOM & Events')" class="quiz-button start-quiz">Start
-                    Quiz</a>
-                <a href="results.html" class="quiz-button see-result">See Results</a>
+                <button data-theme="dom-events" class="quiz-button start-quiz">Start
+                    Quiz</button>
+                <button class="quiz-button see-result">See Results</button>
             </div>
         </div>
 
@@ -47,14 +47,14 @@
                 <h3 class="theme-title">Objects & Arrays</h3>
             </div>
             <div class="buttons-container">
-                <a href="quiz.html" onclick="saveChoosedTheme('Objects & Arrays')" class="quiz-button start-quiz">Start
-                    Quiz</a>
-                <a href="results.html" class="quiz-button see-result">See Results</a>
+                <button data-theme="objects-arrays" class="quiz-button start-quiz">Start
+                    Quiz</button>
+                <button class="quiz-button see-result">See Results</button>
             </div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script type="module" src="../js/main.js"></script>
 </body>
 
 </html>
