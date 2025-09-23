@@ -12,20 +12,23 @@ function initializeUserInfos(event) {
     } else {
         hideError();
     }
-
-    const userInfos = {
-        themes: {
-            "JavaScript Basics": { answers: [], score: 0, totalTime: 0, dateTime: '' },
-            "DOM & Events": { answers: [], score: 0, totalTime: 0, dateTime: '' },
-            "Objects & Arrays": { answers: [], score: 0, totalTime: 0, dateTime: '' }
-        }
-    };
-
-    saveUser(username, userInfos);
+    saveUser(username);
 
     window.location.href = "pages/thems.html";
     return true;
 }
 
 // attach event listener
-document.getElementById("username-form").addEventListener("submit", initializeUserInfos);
+
+document.addEventListener('DOMContentLoaded', () => {
+    const pageId = document.body.id;
+
+    if (pageId === 'index-page') {
+        document.getElementById("username-form").addEventListener("submit", initializeUserInfos);
+    }
+    else if (pageId === 'themes-page'){
+        console.log('hi');
+        
+    }
+
+});

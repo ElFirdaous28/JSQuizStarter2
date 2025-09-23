@@ -1,4 +1,13 @@
-export function saveUser(username, userInfos) {
+export function saveUser(username) {
+
+    const userInfos = {
+        themes: {
+            "JavaScript Basics": { answers: [], score: 0, totalTime: 0, dateTime: '' },
+            "DOM & Events": { answers: [], score: 0, totalTime: 0, dateTime: '' },
+            "Objects & Arrays": { answers: [], score: 0, totalTime: 0, dateTime: '' }
+        }
+    };
+
     const users = JSON.parse(localStorage.getItem("users")) || {};
     users[username] = userInfos;
     localStorage.setItem("users", JSON.stringify(users));
