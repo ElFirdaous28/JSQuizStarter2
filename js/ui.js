@@ -13,3 +13,7 @@ export function hideError() {
     const errorElement = document.getElementById("username-error");
     errorElement.style.display = "none";
 }
+
+export function getStartQuizButtons() {
+    return document.querySelectorAll(".start-quiz");
+}

@@ -1,5 +1,5 @@
-import { getUsernameInput, showError, hideError } from './ui.js';
-import { saveUser } from './storage.js';
+import { getUsernameInput, showError, hideError, getStartQuizButtons } from './ui.js';
+import { saveUser, saveChoosedTheme } from './storage.js';
 
 function initializeUserInfos(event) {
     event.preventDefault();
@@ -19,16 +19,17 @@ function initializeUserInfos(event) {
 }
 
 // attach event listener
-
 document.addEventListener('DOMContentLoaded', () => {
     const pageId = document.body.id;
 
     if (pageId === 'index-page') {
         document.getElementById("username-form").addEventListener("submit", initializeUserInfos);
     }
-    else if (pageId === 'themes-page'){
-        console.log('hi');
-        
-    }
+    else if (pageId === 'themes-page') {
+        const startQuizButtons = getStartQuizButtons();
+        startQuizButtons.forEach(element => {
 
+            element.addEventListener("click", () => saveChoosedTheme(element.getAttribute('data-theme')));
+        });
+    }
 });
