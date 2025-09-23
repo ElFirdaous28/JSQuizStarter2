@@ -1,8 +1,8 @@
 import { getUsernameInput, showError, hideError, getStartQuizButtons } from './ui.js';
 import { saveUser, saveChoosedTheme } from './storage.js';
-import { loadQuestions } from './question.js';
+import { fetchQuestions } from './question.js';
 
-let chosedTheme = localStorage.getItem('selectedTheme');
+let chosenTheme = localStorage.getItem('selectedTheme');
 
 function initializeUserInfos(event) {
     event.preventDefault();
@@ -19,6 +19,11 @@ function initializeUserInfos(event) {
 
     window.location.href = "pages/thems.html";
     return true;
+}
+
+async function loadQuestions() {
+    const questions = await fetchQuestions(chosenTheme);
+    console.log(questions);
 }
 
 // attach event listener
@@ -43,6 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // quiz page
     else if (pageId === 'quiz-page') {
-        loadQuestions(chosedTheme);
+        loadQuestions()
     }
 });
