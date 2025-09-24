@@ -95,3 +95,9 @@ export function showAnswerFeedback(correctAnswers, checkedInputs, correct) {
         }
     });
 }
+
+export function updateTimerDisplay(seconds) {
+    const timerElement = document.getElementById("timer");
+    if (!timerElement) return;
+    timerElement.textContent = `00:${String(seconds).padStart(2, '0')}`;
+}
