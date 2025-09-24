@@ -555,6 +555,10 @@
      margin-right: 0.5rem;
  }
 
+ #theme-name {
+     color: #16325B;
+ }
+
  /* Responsive design */
  @media (max-width: 768px) {
      .quiz-container {
