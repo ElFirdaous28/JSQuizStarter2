@@ -2,9 +2,9 @@ export function saveUser(username) {
 
     const userInfos = {
         themes: {
-            "JavaScript Basics": { answers: [], score: 0, totalTime: 0, dateTime: '' },
-            "DOM & Events": { answers: [], score: 0, totalTime: 0, dateTime: '' },
-            "Objects & Arrays": { answers: [], score: 0, totalTime: 0, dateTime: '' }
+            "javascript-basics": { answers: [], score: 0, totalTime: 0, dateTime: '' },
+            "dom-events": { answers: [], score: 0, totalTime: 0, dateTime: '' },
+            "objects-arrays": { answers: [], score: 0, totalTime: 0, dateTime: '' }
         }
     };
 
@@ -52,4 +52,10 @@ export function saveScoreDate(currentUser, score, selectedTheme) {
 
     localStorage.setItem("users", JSON.stringify(users));
 
+}
+export function saveTotalTime(currentUser, selectedTheme, totalTime) {
+    let users = getUsers();
+
+    users[currentUser].themes[selectedTheme].totalTime = totalTime;
+    localStorage.setItem("users", JSON.stringify(users));
 }

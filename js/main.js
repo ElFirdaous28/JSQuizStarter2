@@ -1,5 +1,5 @@
-import { getUsernameInput, showError, hideError, getStartQuizButtons, displayQuestion, showAnswerFeedback } from './ui.js';
-import { saveUser, saveChoosedTheme, saveUserAnswer, saveScoreDate } from './storage.js';
+import { getUsernameInput, showError, hideError, getStartQuizButtons, displayQuestion, showAnswerFeedback, updateTimerDisplay } from './ui.js';
+import { saveUser, saveChoosedTheme, saveUserAnswer, saveScoreDate, saveTotalTime } from './storage.js';
 import { fetchQuestions, validateAnswers } from './question.js';
 
 let currentUser = localStorage.getItem('currentUser');
@@ -7,6 +7,10 @@ let selectedTheme = localStorage.getItem('selectedTheme');
 let themeQuestions = [];
 let questionIndex = 0;
 let score = 0;
+
+let totalTime = 0; // total time in seconds
+let timer;
+let time;
 
 function initIndexPage() {
     const form = document.getElementById("username-form");
@@ -48,6 +52,7 @@ async function initQuizPage() {
         return;
     }
     displayQuestion(questionIndex, themeQuestions[questionIndex]);
+    startTimer();
 }
 
 function goToNext() {
@@ -80,7 +85,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+
 function handleAnswer(isLastQuestion = false) {
+    stopTimer();
     const checkedInputs = document.querySelectorAll('#options-container input[type="checkbox"]:checked');
     const selectedAnswers = Array.from(checkedInputs).map(input => input.value);
 
@@ -92,6 +99,7 @@ function handleAnswer(isLastQuestion = false) {
 
     if (isLastQuestion) {
         saveScoreDate(currentUser, score, selectedTheme);
+        saveTotalTime(currentUser, selectedTheme, totalTime);
         score = 0;
         setTimeout(() => window.location.href = 'results.html', 1000);
     } else {
@@ -99,7 +107,30 @@ function handleAnswer(isLastQuestion = false) {
             questionIndex++;
             if (questionIndex < themeQuestions.length) {
                 displayQuestion(questionIndex, themeQuestions[questionIndex], themeQuestions.length);
+                startTimer();
             }
         }, 1000);
     }
+}
+
+// timer functions 
+function startTimer() {
+    time = 20;
+    updateTimerDisplay(time);
+    timer = setInterval(() => {
+        time--;
+
+        if (time < 0) {
+            questionIndex < themeQuestions.length - 1 ? goToNext() : seeResults;
+        } else {
+            updateTimerDisplay(time);
+        }
+    }, 1000);
+}
+
+function stopTimer() {
+    let spent = Math.max(0, 20 - time);
+    totalTime += spent;
+
+    clearInterval(timer);
 }
