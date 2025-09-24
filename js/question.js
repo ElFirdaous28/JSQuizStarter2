@@ -35,3 +35,10 @@ export async function fetchQuestions(theme) {
         return [];
     }
 }
+
+export function validateAnswers(correctAnswers, userAnswers) {
+    const sortedCorrect = [...correctAnswers].sort();
+    const sortedUser = [...userAnswers].sort();
+    return sortedCorrect.length === sortedUser.length &&
+        sortedCorrect.every((val, i) => val === sortedUser[i]);
+}
