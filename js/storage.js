@@ -59,3 +59,11 @@ export function saveTotalTime(currentUser, selectedTheme, totalTime) {
     users[currentUser].themes[selectedTheme].totalTime = totalTime;
     localStorage.setItem("users", JSON.stringify(users));
 }
+
+export function getUserAnswers(currentUser, selectedTheme) {
+    const users = JSON.parse(localStorage.getItem("users")) || {};
+    if (!users[currentUser] || !users[currentUser].themes[selectedTheme]) {
+        return [];
+    }
+    return users[currentUser].themes[selectedTheme].answers;
+}
