@@ -1,3 +1,6 @@
+import { getUsers, getUserAnswers } from './storage.js'
+import { validateAnswers } from './question.js'
+
 export function getUsernameInput() {
     const input = document.getElementById("username-input");
     return input.value.trim();
@@ -23,6 +26,7 @@ export function displayQuestion(questionIndex, question, length) {
 
     let questionsContainer = document.getElementById('question-details');
     const seeResultsButton = document.getElementById('see-results');
+
     const quizContainer = document.querySelector('.quiz');
     let questionHtml;
 
@@ -49,7 +53,8 @@ export function displayQuestion(questionIndex, question, length) {
 
     if ((questionIndex == length - 1)) {
         nextButton.style.display = 'none';
-        seeResultsButton.style.display = 'block'
+        seeResultsButton.style.display = 'block';
+        seeResultsButton.disabled = false;
     }
 
     document.querySelectorAll(".option").forEach(option => {
@@ -100,4 +105,68 @@ export function updateTimerDisplay(seconds) {
     const timerElement = document.getElementById("timer");
     if (!timerElement) return;
     timerElement.textContent = `00:${String(seconds).padStart(2, '0')}`;
+}
+
+export function displayResults(currentUser, selectedTheme, themeQuestionsLength) {
+    let users = getUsers();
+
+    document.getElementById('nbr-correct').textContent = users[currentUser].themes[selectedTheme].score;
+    document.getElementById('nbr_incorrect').textContent = themeQuestionsLength - users[currentUser].themes[selectedTheme].score;
+    document.getElementById('resolution-time').textContent = `${users[currentUser].themes[selectedTheme].totalTime} `;
+}
+
+export function displayfeedbacks(currentUser, selectedTheme, themeQuestions) {
+    let questionsContainer = document.getElementById('questions-container');
+    let userAnswers = getUserAnswers(currentUser, selectedTheme);
+
+    themeQuestions.forEach((question, index) => {
+        let userQuestionAnswers = userAnswers.find(ans => ans.questionId === question.id);
+
+        let correct = false;
+        let partiallyCorrect = false;
+
+        if (userQuestionAnswers) {
+            correct = validateAnswers(question.answers, userQuestionAnswers.userAnswers);
+        }
+
+        let questionDiv = `
+            <div class="question-feedback-box">
+                <h2>Question ${index + 1}</h2>
+                <p>${question.question}</p>
+                <div class="options-container">`;
+
+        // loop options
+        question.options.forEach(option => {
+            let classes = "feedback-option";
+
+            if (question.answers.includes(option)) {
+                classes += " correct";
+            } else if (
+                userQuestionAnswers &&
+                userQuestionAnswers.userAnswers.includes(option)
+            ) {
+                classes += " incorrect";
+            }
+            if (!correct && userQuestionAnswers) {
+                partiallyCorrect = userQuestionAnswers.userAnswers.some(ans => question.answers.includes(ans));
+            }
+            questionDiv += `<div class="${classes}">${option}</div>`;
+        });
+
+        if (correct) {
+            questionDiv += `<p class="feedback-note correct" style="color: #28a745;">Correct</p>`; // green
+        } else if (partiallyCorrect) {
+            questionDiv += `<p class="feedback-note partially" style="color: #f0b84e;">Partially correct</p>`; // yellow/orange
+        } else {
+            questionDiv += `<p class="feedback-note incorrect" style="color: #df3131;">Incorrect</p>`; // red
+        }
+
+
+        questionDiv += `
+                </div>
+            </div>
+        `;
+
+        questionsContainer.innerHTML += questionDiv;
+    });
 }

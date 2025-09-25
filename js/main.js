@@ -1,4 +1,7 @@
-import { getUsernameInput, showError, hideError, getStartQuizButtons, displayQuestion, showAnswerFeedback, updateTimerDisplay } from './ui.js';
+import {
+    getUsernameInput, showError, hideError, getStartQuizButtons, displayQuestion,
+    showAnswerFeedback, updateTimerDisplay, displayResults, displayfeedbacks
+} from './ui.js';
 import { saveUser, saveChoosedTheme, saveUserAnswer, saveScoreDate, saveTotalTime } from './storage.js';
 import { fetchQuestions, validateAnswers } from './question.js';
 
@@ -55,6 +58,11 @@ async function initQuizPage() {
     startTimer();
 }
 
+async function initResultsPage() {
+    themeQuestions = await fetchQuestions(selectedTheme);
+    displayResults(currentUser, selectedTheme, themeQuestions.length);
+    displayfeedbacks(currentUser, selectedTheme, themeQuestions);
+}
 function goToNext() {
     handleAnswer(false);
 }
@@ -78,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
             initQuizPage();
             break;
         case "results-page":
-            // initFeedbackPage();
+            initResultsPage();
             break;
         default:
             console.warn("Unknown page:", pageId);
@@ -98,6 +106,7 @@ function handleAnswer(isLastQuestion = false) {
     saveUserAnswer(currentUser, selectedTheme, themeQuestions[questionIndex].id, selectedAnswers);
 
     if (isLastQuestion) {
+        console.log('we can see results now!');
         saveScoreDate(currentUser, score, selectedTheme);
         saveTotalTime(currentUser, selectedTheme, totalTime);
         score = 0;

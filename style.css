@@ -533,7 +533,8 @@
      box-shadow: 0 4px 12px rgba(22, 50, 91, 0.3);
  }
 
- #next-question:disabled {
+ #next-question:disabled,
+ #see-results:disabled {
      background-color: #6c757d;
      cursor: not-allowed;
      transform: none;
