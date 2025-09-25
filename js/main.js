@@ -4,6 +4,7 @@ import {
 } from './ui.js';
 import { saveUser, saveChoosedTheme, saveUserAnswer, saveScoreDate, saveTotalTime } from './storage.js';
 import { fetchQuestions, validateAnswers } from './question.js';
+import { exportPDF } from './export.js'
 
 let currentUser = localStorage.getItem('currentUser');
 let selectedTheme = localStorage.getItem('selectedTheme');
@@ -59,9 +60,14 @@ async function initQuizPage() {
 }
 
 async function initResultsPage() {
+    const exportPdfButton = document.getElementById("export-pdf");
+
     themeQuestions = await fetchQuestions(selectedTheme);
     displayResults(currentUser, selectedTheme, themeQuestions.length);
     displayfeedbacks(currentUser, selectedTheme, themeQuestions);
+    exportPdfButton.addEventListener("click", () => {
+        exportPDF("content-to-download", `JSQuizStarter_${currentUser}`);
+    })
 }
 function goToNext() {
     handleAnswer(false);
