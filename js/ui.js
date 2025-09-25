@@ -29,7 +29,7 @@ export function displayQuestion(questionIndex, question, length) {
 
     const quizContainer = document.querySelector('.quiz');
 
-    // questionsContainer.innerHTML = "";
+    questionsContainer.innerHTML = "";
 
     // append question Number
     const questionNumberDiv = document.createElement("div");
@@ -146,13 +146,23 @@ export function displayfeedbacks(currentUser, selectedTheme, themeQuestions) {
             correct = validateAnswers(question.answers, userQuestionAnswers.userAnswers);
         }
 
-        let questionDiv = `
-            <div class="question-feedback-box">
-                <h2>Question ${index + 1}</h2>
-                <p>${question.question}</p>
-                <div class="options-container">`;
+        const questionBox = document.createElement("div");
+        questionBox.className = "question-feedback-box";
 
-        // loop options
+        // append question number
+        const questionNumberTitle = document.createElement("h2");
+        questionNumberTitle.textContent = `Question ${index + 1}`;
+        questionBox.appendChild(questionNumberTitle);
+
+        // qppend question
+        const questionText = document.createElement("p");
+        questionText.textContent = question.question;
+        questionBox.appendChild(questionText);
+
+        // create options container
+        const optionsContainer = document.createElement("div");
+        optionsContainer.className = "options-container";
+
         question.options.forEach(option => {
             let classes = "feedback-option";
 
@@ -164,26 +174,75 @@ export function displayfeedbacks(currentUser, selectedTheme, themeQuestions) {
             ) {
                 classes += " incorrect";
             }
+
             if (!correct && userQuestionAnswers) {
-                partiallyCorrect = userQuestionAnswers.userAnswers.some(ans => question.answers.includes(ans));
+                partiallyCorrect = userQuestionAnswers.userAnswers.some(ans =>
+                    question.answers.includes(ans)
+                );
             }
-            questionDiv += `<div class="${classes}">${option}</div>`;
+
+            const optionDiv = document.createElement("div");
+            optionDiv.className = classes;
+            optionDiv.textContent = option;
+            optionsContainer.appendChild(optionDiv);
         });
+        questionBox.appendChild(optionsContainer);
+
+        // feedback note
+        const feedbackNote = document.createElement("p");
+        feedbackNote.classList.add("feedback-note");
 
         if (correct) {
-            questionDiv += `<p class="feedback-note correct" style="color: #28a745;">Correct</p>`; // green
+            feedbackNote.classList.add("correct");
+            feedbackNote.textContent = "Correct";
         } else if (partiallyCorrect) {
-            questionDiv += `<p class="feedback-note partially" style="color: #f0b84e;">Partially correct</p>`; // yellow/orange
+            feedbackNote.classList.add("partially");
+            feedbackNote.textContent = "Partially correct";
         } else {
-            questionDiv += `<p class="feedback-note incorrect" style="color: #df3131;">Incorrect</p>`; // red
+            feedbackNote.classList.add("incorrect");
+            feedbackNote.textContent = "Incorrect";
         }
 
+        questionBox.appendChild(feedbackNote);
 
-        questionDiv += `
-                </div>
-            </div>
-        `;
+        questionsContainer.appendChild(questionBox);
 
-        questionsContainer.innerHTML += questionDiv;
+
+        // let questionDiv = `
+        //     <div class="question-feedback-box">
+        //         <h2>Question ${index + 1}</h2>
+        //         <p>${question.question}</p>
+        //         <div class="options-container">`;
+
+        // // loop options
+        // question.options.forEach(option => {
+        //     let classes = "feedback-option";
+
+        //     if (question.answers.includes(option)) {
+        //         classes += " correct";
+        //     } else if (
+        //         userQuestionAnswers &&
+        //         userQuestionAnswers.userAnswers.includes(option)
+        //     ) {
+        //         classes += " incorrect";
+        //     }
+        //     if (!correct && userQuestionAnswers) {
+        //         partiallyCorrect = userQuestionAnswers.userAnswers.some(ans => question.answers.includes(ans));
+        //     }
+        //     questionDiv += `<div class="${classes}">${option}</div>`;
+        // });
+
+        // if (correct) {
+        //     questionDiv += `<p class="feedback-note correct" style="color: #28a745;">Correct</p>`;
+        // } else if (partiallyCorrect) {
+        //     questionDiv += `<p class="feedback-note partially" style="color: #f0b84e;">Partially correct</p>`;
+        // } else {
+        //     questionDiv += `<p class="feedback-note incorrect" style="color: #df3131;">Incorrect</p>`;
+        // }
+
+
+        // questionDiv += `</div>`;
+
+        // questionsContainer.innerHTML += questionDiv;
     });
 }
