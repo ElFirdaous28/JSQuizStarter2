@@ -2,8 +2,9 @@ import {
     getUsernameInput, showError, hideError, getStartQuizButtons, displayQuestion,
     showAnswerFeedback, updateTimerDisplay, displayResults, displayfeedbacks
 } from './ui.js';
-import { saveUser, saveChoosedTheme, saveUserAnswer, saveScoreDate, saveTotalTime } from './storage.js';
+import { saveUser, saveChoosedTheme, saveUserAnswer, saveScoreDate, saveTotalTime, getUserAnswers } from './storage.js';
 import { fetchQuestions, validateAnswers } from './question.js';
+import { exportPDF, exportJSON, exportCSV } from './export.js'
 
 let currentUser = localStorage.getItem('currentUser');
 let selectedTheme = localStorage.getItem('selectedTheme');
@@ -59,9 +60,22 @@ async function initQuizPage() {
 }
 
 async function initResultsPage() {
+    const exportPdfButton = document.getElementById("export-pdf");
+    const exportJsonButton = document.getElementById("export-json");
+    const exportCSVButton = document.getElementById("export-csv");
+
     themeQuestions = await fetchQuestions(selectedTheme);
     displayResults(currentUser, selectedTheme, themeQuestions.length);
     displayfeedbacks(currentUser, selectedTheme, themeQuestions);
+    exportPdfButton.addEventListener("click", () => {
+        exportPDF("content-to-download", `JSQuizStarter_${currentUser}`);
+    })
+    exportJsonButton.addEventListener("click", () => {
+        exportJSON(getUserAnswers(currentUser, selectedTheme), `JSQuizStarter_${currentUser}`);
+    })
+    exportCSVButton.addEventListener("click", () => {
+        exportCSV(getUserAnswers(currentUser, selectedTheme), `JSQuizStarter_${currentUser}`);
+    })
 }
 function goToNext() {
     handleAnswer(false);

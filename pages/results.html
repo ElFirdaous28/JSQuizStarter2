@@ -6,14 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JSQuizStarter Result</title>
     <link rel="stylesheet" href="../style.css">
-    
+
 </head>
 
 <body id="results-page">
     <div class="home-container result-container">
         <div class="header-buttons">
             <a href="themes.html" id="take-a-quiz">Take a Quiz</a>
-            <button id="download-button">Download Report</button>
+            <div class="dropdown">
+                <button id="export-button">Export Report ▼</button>
+                <div class="dropdown-content">
+                    <button id="export-pdf">Ecport As PDF</button>
+                    <button id="export-json">Export As JSON</button>
+                    <button id="export-csv">Export As CSV</button>
+                </div>
+            </div>
         </div>
 
         <div id="content-to-download" style="width: 100%;">
@@ -54,7 +61,7 @@
                             <circle cx="12" cy="12" r="10" />
                         </svg>
                     </div>
-                    <p>Correct Answers</p>
+                    <p>Spended Time</p>
                     <p><span id="resolution-time"></span>seconds</p>
                 </div>
             </div>
@@ -89,12 +96,7 @@
                 </div> -->
                 </div>
             </div>
-
         </div>
-
-        <!-- <div style="width: 50%;">
-            <button id="see-more-button">See More</button>
-        </div> -->
     </div>
     <script type="module" src="../js/main.js"></script>
 
