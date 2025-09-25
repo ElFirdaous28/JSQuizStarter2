@@ -28,23 +28,40 @@ export function displayQuestion(questionIndex, question, length) {
     const seeResultsButton = document.getElementById('see-results');
 
     const quizContainer = document.querySelector('.quiz');
-    let questionHtml;
 
-    questionHtml = ` <div class="question-number">Question <span id="question-number">${questionIndex + 1}/10</span></div>
-                                        <div class="question">${question.question}</div>
-                                        <div id="options-container">`
+    // questionsContainer.innerHTML = "";
+
+    // append question Number
+    const questionNumberDiv = document.createElement("div");
+    questionNumberDiv.className = "question-number";
+    questionNumberDiv.textContent = `Question ${questionIndex + 1}/10`;
+    questionsContainer.appendChild(questionNumberDiv);
+
+    // append question
+    const questionDiv = document.createElement("div");
+    questionDiv.className = "question";
+    questionDiv.textContent = question.question;
+    questionsContainer.appendChild(questionDiv);
+
+    // append questions
+    const optionsContainer = document.createElement("div");
+    optionsContainer.id = "options-container";
+
     question.options.forEach((option) => {
+        const label = document.createElement("label");
+        label.className = "option";
 
-        questionHtml += `<label class="option">
-                        <input type="checkbox" name="${questionIndex}" value="${option}">
-                        ${option}
-                    </label>`;
-    })
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.name = questionIndex;
+        checkbox.value.option;
 
-    questionHtml += `</div>
-                     </div>`
+        label.appendChild(checkbox);
+        label.appendChild(document.createTextNode(option));
 
-    questionsContainer.innerHTML = questionHtml;
+        optionsContainer.appendChild(label);
+    });
+    questionsContainer.appendChild(optionsContainer);
 
     if (questionIndex > 0) {
         quizContainer.style.border = '2px solid white';
