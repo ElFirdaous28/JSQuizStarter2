@@ -262,7 +262,7 @@
  }
 
  .quiz-button,
- #download-button {
+ #export-button {
      border: none;
      text-decoration: none;
      padding: 15px 25px;
@@ -739,4 +739,39 @@
      }
  }
 
- @media (min-width:768px) {}
+ /* =================================================================== */
+ /* Dropdown container */
+ .dropdown {
+     position: relative;
+     display: inline-block;
+ }
+
+ /* Dropdown content hidden by default */
+ .dropdown-content {
+     display: none;
+     position: absolute;
+     background-color: #f9f9f9;
+     min-width: 150px;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     z-index: 1;
+     flex-direction: column;
+     margin-left: 20px;
+ }
+
+ /* Show dropdown on hover */
+ .dropdown:hover .dropdown-content {
+     display: flex;
+ }
+
+ /* Buttons styling inside dropdown */
+ .dropdown-content button {
+     background: white;
+     border: none;
+     padding: 10px;
+     text-align: left;
+     cursor: pointer;
+ }
+
+ .dropdown-content button:hover {
+     background-color: #f0b84e;
+ }
