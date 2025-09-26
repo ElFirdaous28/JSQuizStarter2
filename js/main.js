@@ -1,11 +1,12 @@
 import {
     getUsernameInput, showError, hideError, getStartQuizButtons, displayQuestion,
-    showAnswerFeedback, updateTimerDisplay, displayResults, displayfeedbacks, displayPlayedGamesPerTheme, displayAverageTheme
+    showAnswerFeedback, updateTimerDisplay, displayResults, displayfeedbacks, displayPlayedGamesPerTheme,
+    displayAverageTheme, displayTopThree
 } from './ui.js';
 import { saveUser, saveChoosedTheme, saveUserAnswer, saveScoreDate, saveTotalTime, getUserAnswers } from './storage.js';
 import { fetchQuestions, validateAnswers } from './question.js';
 import { exportPDF, exportJSON, exportCSV } from './export.js'
-import { playedGamesPerTheme } from './statistics.js'
+
 
 let currentUser = localStorage.getItem('currentUser');
 let selectedTheme = localStorage.getItem('selectedTheme');
@@ -16,6 +17,32 @@ let score = 0;
 let totalTime = 0; // total time in seconds
 let timer;
 let time;
+
+
+// attach event listener
+document.addEventListener('DOMContentLoaded', () => {
+    const pageId = document.body.id;
+
+    switch (pageId) {
+        case "index-page":
+            initIndexPage();
+            break;
+        case "themes-page":
+            initThemesPage();
+            break;
+        case "quiz-page":
+            initQuizPage();
+            break;
+        case "results-page":
+            initResultsPage();
+            break;
+        case "statistics-page":
+            initStatisticsPage();
+            break;
+        default:
+            console.warn("Unknown page:", pageId);
+    }
+});
 
 function initIndexPage() {
     const form = document.getElementById("username-form");
@@ -81,6 +108,7 @@ async function initResultsPage() {
 function initStatisticsPage() {
     displayPlayedGamesPerTheme();
     displayAverageTheme();
+    displayTopThree();
 }
 
 function goToNext() {
@@ -90,31 +118,6 @@ function goToNext() {
 function seeResults() {
     handleAnswer(true);
 }
-
-// attach event listener
-document.addEventListener('DOMContentLoaded', () => {
-    const pageId = document.body.id;
-
-    switch (pageId) {
-        case "index-page":
-            initIndexPage();
-            break;
-        case "themes-page":
-            initThemesPage();
-            break;
-        case "quiz-page":
-            initQuizPage();
-            break;
-        case "results-page":
-            initResultsPage();
-            break;
-        case "statistics-page":
-            initStatisticsPage();
-            break;
-        default:
-            console.warn("Unknown page:", pageId);
-    }
-});
 
 
 function handleAnswer(isLastQuestion = false) {

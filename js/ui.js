@@ -1,6 +1,6 @@
 import { getUsers, getUserAnswers } from './storage.js'
 import { validateAnswers } from './question.js'
-import { playedGamesPerTheme, averageScorePerTheme } from './statistics.js'
+import { playedGamesPerTheme, averageScorePerTheme, TopThree } from './statistics.js'
 
 export function getUsernameInput() {
     const input = document.getElementById("username-input");
@@ -55,7 +55,7 @@ export function displayQuestion(questionIndex, question, length) {
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.name = questionIndex;
-        checkbox.value.option;
+        checkbox.value = option;
 
         label.appendChild(checkbox);
         label.appendChild(document.createTextNode(option));
@@ -234,5 +234,34 @@ export function displayAverageTheme() {
         if (data[theme] !== undefined) {
             box.textContent = data[theme];
         }
+    });
+}
+
+export function displayTopThree() {
+    const data = TopThree();
+    const container = document.getElementById("top-three");
+    container.innerHTML = "";
+
+    data.forEach(user => {
+        const div = document.createElement("div");
+        div.classList.add("top-three-box");
+
+        // first letter
+        const firstLetter = document.createElement("div");
+        firstLetter.classList.add("username-first-letter");
+        firstLetter.textContent = user.username.charAt(0).toUpperCase();
+
+        // username
+        const username = document.createElement("div");
+        username.classList.add("username");
+        username.textContent = user.username.toUpperCase();
+
+        // global score
+        const score = document.createElement("div");
+        score.classList.add("global-score");
+        score.textContent = `${user.globalScore} Points`;
+
+        div.append(firstLetter, username, score);
+        container.appendChild(div);
     });
 }
