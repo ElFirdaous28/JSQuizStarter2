@@ -2,9 +2,9 @@ export function saveUser(username) {
 
     const userInfos = {
         themes: {
-            "javascript-basics": { answers: [], score: 0, totalTime: 0, dateTime: '' },
-            "dom-events": { answers: [], score: 0, totalTime: 0, dateTime: '' },
-            "objects-arrays": { answers: [], score: 0, totalTime: 0, dateTime: '' }
+            "javascript-basics": { answers: [], score: 0, totalTime: 0, dateTime: '', status: 'not-started' },
+            "dom-events": { answers: [], score: 0, totalTime: 0, dateTime: '', status: 'not-started' },
+            "objects-arrays": { answers: [], score: 0, totalTime: 0, dateTime: '', status: 'not-started' }
         }
     };
 

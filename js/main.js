@@ -1,10 +1,11 @@
 import {
     getUsernameInput, showError, hideError, getStartQuizButtons, displayQuestion,
-    showAnswerFeedback, updateTimerDisplay, displayResults, displayfeedbacks
+    showAnswerFeedback, updateTimerDisplay, displayResults, displayfeedbacks, displayPlayedGamesPerTheme, displayAverageTheme
 } from './ui.js';
 import { saveUser, saveChoosedTheme, saveUserAnswer, saveScoreDate, saveTotalTime, getUserAnswers } from './storage.js';
 import { fetchQuestions, validateAnswers } from './question.js';
 import { exportPDF, exportJSON, exportCSV } from './export.js'
+import { playedGamesPerTheme } from './statistics.js'
 
 let currentUser = localStorage.getItem('currentUser');
 let selectedTheme = localStorage.getItem('selectedTheme');
@@ -77,6 +78,11 @@ async function initResultsPage() {
         exportCSV(getUserAnswers(currentUser, selectedTheme), `JSQuizStarter_${currentUser}`);
     })
 }
+function initStatisticsPage() {
+    displayPlayedGamesPerTheme();
+    displayAverageTheme();
+}
+
 function goToNext() {
     handleAnswer(false);
 }
@@ -101,6 +107,9 @@ document.addEventListener('DOMContentLoaded', () => {
             break;
         case "results-page":
             initResultsPage();
+            break;
+        case "statistics-page":
+            initStatisticsPage();
             break;
         default:
             console.warn("Unknown page:", pageId);

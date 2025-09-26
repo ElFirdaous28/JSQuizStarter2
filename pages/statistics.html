@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Quiz Statistics</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body id="statistics-page">
+
+    <div class="home-container result-container">
+        <div style="width: 100%;">
+            <!-- played games per theme -->
+            <div class="plyed-theme-container">
+                <div>
+                    <h1>Played Games Per Theme:</h1>
+                </div>
+                <div class="result-boxes">
+                    <div class="box">
+                        <h2 class="statistics-title">JavaScript Basics</h2>
+                        <p class="statistics-number nbr-plyed" data-theme="javascript-basics"></p>
+                    </div>
+                    <div class="box">
+                        <h2 class="statistics-title">DOM & Events</h2>
+                        <p class="statistics-number nbr-plyed" data-theme="dom-events"></p>
+                    </div>
+                    <div class="box time">
+                        <h2 class="statistics-title">Objects & Arrays</h2>
+                        <p class="statistics-number nbr-plyed" data-theme="objects-arrays"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- average global score per theme -->
+            <div class="plyed-theme-container">
+                <div>
+                    <h1>Average Score Per Theme</h1>
+                </div>
+                <div class="result-boxes">
+                    <div class="box">
+                        <h2 class="statistics-title">JavaScript Basics</h2>
+                        <p class="statistics-number average-score" data-theme="javascript-basics"></p>
+                    </div>
+                    <div class="box">
+                        <h2 class="statistics-title">DOM & Events</h2>
+                        <p class="statistics-number average-score" data-theme="dom-events"></p>
+                    </div>
+                    <div class="box time">
+                        <h2 class="statistics-title">Objects & Arrays</h2>
+                        <p class="statistics-number average-score" data-theme="objects-arrays"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="../js/main.js"></script>
+</body>
+
+</html>
