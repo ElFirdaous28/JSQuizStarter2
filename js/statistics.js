@@ -7,8 +7,6 @@ export function playedGamesPerTheme() {
         Object.entries(user.themes).forEach(([theme, data]) => {
             if (data.status !== 'not-started') {
                 counts[theme] = (counts[theme] || 0) + 1;
-            } else {
-                counts[theme] = counts[theme] || 0; // keep it 0
             }
         });
         return counts;
@@ -23,7 +21,8 @@ export function averageScorePerTheme() {
     // calculate sum of scores and played times
     const themeTotals = users.reduce((totals, user) => {
         Object.entries(user.themes).forEach(([theme, data]) => {
-            if (data.score != null) {
+
+            if (data.status !== "not-started" && data.score != null) {
                 totals[theme] = totals[theme] || { sum: 0, count: 0 };
                 totals[theme].sum += data.score; // ✅ use data.score
                 totals[theme].count++;
@@ -58,4 +57,26 @@ export function TopThree() {
     // return top 3
 
     return usersWithScores.slice(0, 3);
+}
+
+export function averageTimePerTheme() {
+    const users = Object.values(getUsers());
+
+    const themeTotals = users.reduce((totals, user) => {
+        Object.entries(user.themes).forEach(([theme, data]) => {
+            if (data.status !== "not-started" && data.totalTime != null) {
+                totals[theme] = totals[theme] || { sum: 0, count: 0 };
+                totals[theme].sum += data.totalTime;
+                totals[theme].count++;
+            }
+        });
+        return totals;
+    }, {});
+
+    const themeAverages = {};
+    Object.entries(themeTotals).forEach(([theme, { sum, count }]) => {
+        themeAverages[theme] = count > 0 ? sum / count : 0;
+    });
+
+    return themeAverages;
 }

@@ -1,6 +1,6 @@
 import { getUsers, getUserAnswers } from './storage.js'
 import { validateAnswers } from './question.js'
-import { playedGamesPerTheme, averageScorePerTheme, TopThree } from './statistics.js'
+import { playedGamesPerTheme, averageScorePerTheme, TopThree, averageTimePerTheme } from './statistics.js'
 
 export function getUsernameInput() {
     const input = document.getElementById("username-input");
@@ -210,19 +210,6 @@ export function displayfeedbacks(currentUser, selectedTheme, themeQuestions) {
     });
 }
 
-
-export function displayPlayedGamesPerTheme() {
-    const data = playedGamesPerTheme();
-    const boxes = document.querySelectorAll(".nbr-plyed");
-
-    boxes.forEach(box => {
-        const theme = box.dataset.theme;
-        if (data[theme] !== undefined) {
-            box.textContent = data[theme];
-        }
-    });
-}
-
 export function displayAverageTheme() {
     const data = averageScorePerTheme();
     // console.log(data);
@@ -265,3 +252,126 @@ export function displayTopThree() {
         container.appendChild(div);
     });
 }
+
+
+// ================================================
+
+
+export function renderPlayedGamesChart() {
+    const dataObj = playedGamesPerTheme();
+    const labels = Object.keys(dataObj);
+    const data = Object.values(dataObj);
+
+    const ctx = document.getElementById('played-games-chart').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'doughnut', // or 'doughnut'
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Played Games per Theme',
+                data: data,
+                backgroundColor: [
+                    '#f0b84e',
+                    '#16325B',
+                    '#2d342c'
+                ],
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            const data = context.dataset.data;
+                            const total = data.reduce((sum, val) => sum + val, 0);
+                            const value = context.parsed;
+                            const percentage = ((value / total) * 100).toFixed(1);
+                            return `${context.label}: ${percentage}%`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+
+export function renderAverageScoreChart() {
+    const ctx = document.getElementById('average-score-chart').getContext('2d');
+
+    const averages = averageScorePerTheme();
+    const labels = Object.keys(averages);
+    const data = Object.values(averages);
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Average Score',
+                data: data,
+                backgroundColor: ['#f0b84e', '#16325B', '#2d342c'],
+                borderColor: ['#d1a843', '#121f48', '#1f261f'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            plugins: {
+                tooltip: {
+                    enabled: true,
+                    callbacks: {
+                        label: (tooltipItem) => `${tooltipItem.raw} Points`
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 10 //max score
+                }
+            }
+        }
+    });
+}
+
+
+export function renderTimeSpentChart() {
+    const data = averageTimePerTheme();
+    const ctx = document.getElementById('average-time-chart').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: Object.keys(data),
+            datasets: [{
+                label: 'Average Time (seconds)',
+                data: Object.values(data),
+                backgroundColor: ['#f0b84e', '#16325B', '#2d342c'],
+                borderColor: ['#d1a843', '#121f48', '#1f261f'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false },
+                tooltip: { enabled: true }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Average Time (s)'
+                    }
+                }
+            }
+        }
+    });
+}
+

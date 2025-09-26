@@ -782,14 +782,16 @@
 
 
  /* ============================================ statistics page ========================================== */
-.statistics-container{
-    display: flex;
-    flex-direction: column;
-    gap: 100px;
-}
-.section-Title{
-    margin-bottom: 40px;
-}
+ .statistics-container {
+     display: flex;
+     flex-direction: column;
+     gap: 100px;
+ }
+
+ .section-Title {
+     margin-bottom: 40px;
+ }
+
  .statistics-title {
      color: #16325B;
  }
@@ -813,6 +815,7 @@
      padding: 2rem 3rem;
      border-radius: 15px;
      font-size: 1.5rem;
+     min-width: 300px;
  }
 
  .username-first-letter {
@@ -824,4 +827,11 @@
      height: 100px;
      border-radius: 50%;
      text-align: center;
+ }
+
+ .charts-container {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+     align-items: end;
+     gap: 100px;
  }
