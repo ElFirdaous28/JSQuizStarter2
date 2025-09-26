@@ -1,5 +1,6 @@
 import { getUsers, getUserAnswers } from './storage.js'
 import { validateAnswers } from './question.js'
+import { playedGamesPerTheme, averageScorePerTheme } from './statistics.js'
 
 export function getUsernameInput() {
     const input = document.getElementById("username-input");
@@ -206,43 +207,32 @@ export function displayfeedbacks(currentUser, selectedTheme, themeQuestions) {
         questionBox.appendChild(feedbackNote);
 
         questionsContainer.appendChild(questionBox);
+    });
+}
 
 
-        // let questionDiv = `
-        //     <div class="question-feedback-box">
-        //         <h2>Question ${index + 1}</h2>
-        //         <p>${question.question}</p>
-        //         <div class="options-container">`;
+export function displayPlayedGamesPerTheme() {
+    const data = playedGamesPerTheme();
+    const boxes = document.querySelectorAll(".nbr-plyed");
 
-        // // loop options
-        // question.options.forEach(option => {
-        //     let classes = "feedback-option";
+    boxes.forEach(box => {
+        const theme = box.dataset.theme;
+        if (data[theme] !== undefined) {
+            box.textContent = data[theme];
+        }
+    });
+}
 
-        //     if (question.answers.includes(option)) {
-        //         classes += " correct";
-        //     } else if (
-        //         userQuestionAnswers &&
-        //         userQuestionAnswers.userAnswers.includes(option)
-        //     ) {
-        //         classes += " incorrect";
-        //     }
-        //     if (!correct && userQuestionAnswers) {
-        //         partiallyCorrect = userQuestionAnswers.userAnswers.some(ans => question.answers.includes(ans));
-        //     }
-        //     questionDiv += `<div class="${classes}">${option}</div>`;
-        // });
+export function displayAverageTheme() {
+    const data = averageScorePerTheme();
+    // console.log(data);
 
-        // if (correct) {
-        //     questionDiv += `<p class="feedback-note correct" style="color: #28a745;">Correct</p>`;
-        // } else if (partiallyCorrect) {
-        //     questionDiv += `<p class="feedback-note partially" style="color: #f0b84e;">Partially correct</p>`;
-        // } else {
-        //     questionDiv += `<p class="feedback-note incorrect" style="color: #df3131;">Incorrect</p>`;
-        // }
+    const boxes = document.querySelectorAll(".average-score");
 
-
-        // questionDiv += `</div>`;
-
-        // questionsContainer.innerHTML += questionDiv;
+    boxes.forEach(box => {
+        const theme = box.dataset.theme;
+        if (data[theme] !== undefined) {
+            box.textContent = data[theme];
+        }
     });
 }

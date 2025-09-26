@@ -609,14 +609,14 @@
  }
 
  .result-boxes {
-     display: flex;
-     justify-content: center;
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+     place-items: center;
+     gap: 2rem;
      align-items: center;
      color: #2d342c;
      font-weight: 600;
      width: 100%;
-     display: flex;
-     justify-content: space-around;
  }
 
  .box {
@@ -626,7 +626,10 @@
      align-items: center;
      border: 2px solid #f0b84e;
      border-radius: 12px;
-     padding: 2rem 5rem;
+     padding: 2rem 4rem;
+     width: 100%;
+     max-width: 400px;
+     box-sizing: border-box;
  }
 
  .quiz-feedback {
@@ -725,7 +728,7 @@
  /* responsive */
  @media(max-width:768px) {
      .result-boxes {
-         flex-direction: column;
+         grid-template-columns: repeat(1, 1fr);
          gap: 1rem;
      }
 
@@ -774,4 +777,19 @@
 
  .dropdown-content button:hover {
      background-color: #f0b84e;
+ }
+
+
+ /* ============================================ statistics page ========================================== */
+ .statistics-title {
+     color: #16325B;
+ }
+
+ .statistics-number {
+     color: #f0b84e;
+     font-weight: bold;
+     font-size: 4rem;
+     line-height: 1;
+     margin: 0;
+     padding: 0;
  }
