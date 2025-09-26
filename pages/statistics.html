@@ -12,47 +12,6 @@
 
     <div class="home-container ">
         <div class="statistics-container" style="width: 100%;">
-            <!-- played games per theme -->
-            <div class="played-theme-container">
-                <div>
-                    <h1 class="section-Title">Played Games Per Theme:</h1>
-                </div>
-                <div class="result-boxes">
-                    <div class="box">
-                        <h2 class="statistics-title">JavaScript Basics</h2>
-                        <p class="statistics-number nbr-plyed" data-theme="javascript-basics"></p>
-                    </div>
-                    <div class="box">
-                        <h2 class="statistics-title">DOM & Events</h2>
-                        <p class="statistics-number nbr-plyed" data-theme="dom-events"></p>
-                    </div>
-                    <div class="box">
-                        <h2 class="statistics-title">Objects & Arrays</h2>
-                        <p class="statistics-number nbr-plyed" data-theme="objects-arrays"></p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- average global score per theme -->
-            <div class="average-container">
-                <div>
-                    <h1 class="section-Title">Average Score Per Theme</h1>
-                </div>
-                <div class="result-boxes">
-                    <div class="box">
-                        <h2 class="statistics-title">JavaScript Basics</h2>
-                        <p class="statistics-number average-score" data-theme="javascript-basics"></p>
-                    </div>
-                    <div class="box">
-                        <h2 class="statistics-title">DOM & Events</h2>
-                        <p class="statistics-number average-score" data-theme="dom-events"></p>
-                    </div>
-                    <div class="box">
-                        <h2 class="statistics-title">Objects & Arrays</h2>
-                        <p class="statistics-number average-score" data-theme="objects-arrays"></p>
-                    </div>
-                </div>
-            </div>
 
             <!-- top three users -->
             <div class="top-three-container">
@@ -61,46 +20,39 @@
                 </div>
 
                 <div id="top-three">
-                    <div class="top-three-box">
-                        <div class="username-first-letter">
-                            A
-                        </div>
-                        <div class="username">
-                            Alex
-                        </div>
-                        <div class="global-score">
-                            5 Poins
-                        </div>
+                    <!-- top three users will show here -->
+                </div>
+            </div>
+            <!--charts  -->
+            <div class="charts-container">
+                <!-- played games per theme -->
+                <div class="played-theme-container">
+                    <div>
+                        <h1 class="section-Title">Played Games Per Theme:</h1>
                     </div>
+                    <canvas id="played-games-chart"></canvas>
+                </div>
 
-                    <div class="top-three-box">
-                        <div class="username-first-letter">
-                            A
-                        </div>
-                        <div class="username">
-                            Alex
-                        </div>
-                        <div class="global-score">
-                            5 Poins
-                        </div>
+                <!-- average global score per theme -->
+                <div class="average-score-container">
+                    <div>
+                        <h1 class="section-Title">Average Score Per Theme:</h1>
                     </div>
+                    <canvas id="average-score-chart"></canvas>
+                </div>
 
-                    <div class="top-three-box">
-                        <div class="username-first-letter">
-                            A
-                        </div>
-                        <div class="username">
-                            Alex
-                        </div>
-                        <div class="global-score">
-                            5 Poins
-                        </div>
+                <!-- average global time per theme -->
+                <div class="average-time-container">
+                    <div>
+                        <h1 class="section-Title">Average Total Time Per Theme:</h1>
                     </div>
+                    <canvas id="average-time-chart"></canvas>
                 </div>
             </div>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="../js/main.js"></script>
 </body>
 

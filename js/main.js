@@ -1,7 +1,7 @@
 import {
     getUsernameInput, showError, hideError, getStartQuizButtons, displayQuestion,
-    showAnswerFeedback, updateTimerDisplay, displayResults, displayfeedbacks, displayPlayedGamesPerTheme,
-    displayAverageTheme, displayTopThree
+    showAnswerFeedback, updateTimerDisplay, displayResults, displayfeedbacks,
+    renderAverageScoreChart, displayTopThree, renderPlayedGamesChart, renderTimeSpentChart
 } from './ui.js';
 import { saveUser, saveChoosedTheme, saveUserAnswer, saveScoreDate, saveTotalTime, getUserAnswers } from './storage.js';
 import { fetchQuestions, validateAnswers } from './question.js';
@@ -106,8 +106,9 @@ async function initResultsPage() {
     })
 }
 function initStatisticsPage() {
-    displayPlayedGamesPerTheme();
-    displayAverageTheme();
+    renderAverageScoreChart();
+    renderPlayedGamesChart();
+    renderTimeSpentChart();
     displayTopThree();
 }
 
