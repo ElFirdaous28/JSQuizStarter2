@@ -5,11 +5,10 @@ export function playedGamesPerTheme() {
 
     const themePlayCounts = users.reduce((counts, user) => {
         Object.entries(user.themes).forEach(([theme, data]) => {
-            if (!data.status === 'not-started') {
+            if (data.status !== 'not-started') {
                 counts[theme] = (counts[theme] || 0) + 1;
-            }
-            else {
-                counts[theme] = 0;
+            } else {
+                counts[theme] = counts[theme] || 0; // keep it 0
             }
         });
         return counts;
@@ -46,17 +45,17 @@ export function TopThree() {
     const users = Object.values(getUsers());
 
     // get usernames with total score
-    const usersWithScores = users.map(user => {
-        const globalScore = Object.values(user.themes).reduce((sum, score) => {
-            return sum + (score || 0);
-        }, 0);
-
-        return { username: user.username, globalScore };
+    const usersWithScores = Object.entries(getUsers()).map(([username, user]) => {
+        const globalScore = Object.values(user.themes).reduce(
+            (sum, data) => sum + (data.score || 0),
+            0
+        );
+        return { username, globalScore };
     });
-
     // sort users by score
     usersWithScores.sort((a, b) => b.globalScore - a.globalScore);
 
     // return top 3
+
     return usersWithScores.slice(0, 3);
 }

@@ -47,6 +47,7 @@ export function saveScoreDate(currentUser, score, selectedTheme) {
     let users = getUsers();
 
     users[currentUser].themes[selectedTheme].score = score;
+    users[currentUser].themes[selectedTheme].status = 'completed';
     users[currentUser].themes[selectedTheme].dateTime = new Date().toISOString();
 
 
