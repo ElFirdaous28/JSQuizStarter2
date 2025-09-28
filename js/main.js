@@ -1,15 +1,18 @@
 import {
-    getUsernameInput, showError, hideError, getStartQuizButtons, displayQuestion,
+    getUsernameInput, showError, hideError, displayQuestion,
     showAnswerFeedback, updateTimerDisplay, displayResults, displayfeedbacks,
-    renderAverageScoreChart, displayTopThree, renderPlayedGamesChart, renderTimeSpentChart
+    renderAverageScoreChart, displayTopThree, renderPlayedGamesChart, renderTimeSpentChart,
+    manageButtonsState,
 } from './ui.js';
-import { saveUser, saveChoosedTheme, saveUserAnswer, saveScoreDate, saveTotalTime, getUserAnswers } from './storage.js';
+import { saveUser, saveChoosedTheme, saveUserAnswer, saveScoreDate, saveTotalTime, getUserAnswers, saveStatus, saveProgressIndex, getProgressIndex } from './storage.js';
 import { fetchQuestions, validateAnswers } from './question.js';
 import { exportPDF, exportJSON, exportCSV } from './export.js'
 
 
 let currentUser = localStorage.getItem('currentUser');
 let selectedTheme = localStorage.getItem('selectedTheme');
+let mode = localStorage.getItem("mode") || "quiz";
+
 let themeQuestions = [];
 let questionIndex = 0;
 let score = 0;
@@ -63,34 +66,65 @@ function initIndexPage() {
 }
 
 function initThemesPage() {
-    const startQuizButtons = getStartQuizButtons();
+    const startQuizButtons = document.querySelectorAll(".start-quiz");
+    const seeResultsButtons = document.querySelectorAll(".theme-result");
+    const ResumeQuizButtons = document.querySelectorAll(".theme-resume");
+
     startQuizButtons.forEach(button => {
         button.addEventListener("click", () => {
             saveChoosedTheme(button.getAttribute("data-theme"));
             window.location.href = "quiz.html";
         });
     });
+
+    seeResultsButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            saveChoosedTheme(button.getAttribute("data-theme"));
+            window.location.href = "results.html";
+        });
+    });
+    ResumeQuizButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            saveChoosedTheme(button.getAttribute("data-theme"));
+            localStorage.setItem("mode", "resume");
+            window.location.href = "quiz.html";
+        });
+    });
+    manageButtonsState(currentUser);
 }
 
 async function initQuizPage() {
     const nextButton = document.getElementById("next-question");
     const seeResultsButton = document.getElementById("see-results");
+    const stopButton = document.getElementById("stop-quiz");
     nextButton.addEventListener("click", goToNext);
-    seeResultsButton.addEventListener("click", seeResults)
+    seeResultsButton.addEventListener("click", seeResults);
+    stopButton.addEventListener("click", stopQuiz);
 
     themeQuestions = await fetchQuestions(selectedTheme);
-    if (!themeQuestions.length) {
-        console.error("No questions found for this theme.");
-        return;
+    questionIndex = 0;
+
+    if (mode === "review") {
+        const userAnswers = getUserAnswers(currentUser, selectedTheme);
+
+        themeQuestions = themeQuestions.filter(q => {
+            const userAnswer = userAnswers.find(ans => ans.questionId === q.id);
+            const isCorrect = validateAnswers(q.answers, userAnswer.userAnswers);
+            return !isCorrect;
+        });
     }
-    displayQuestion(questionIndex, themeQuestions[questionIndex]);
-    startTimer();
+    else if (mode === "resume") {
+        questionIndex = getProgressIndex(currentUser, selectedTheme);
+    }
+    displayQuestion(questionIndex, themeQuestions[questionIndex], themeQuestions.length);
+    if (mode !== "review") startTimer();
 }
 
 async function initResultsPage() {
     const exportPdfButton = document.getElementById("export-pdf");
     const exportJsonButton = document.getElementById("export-json");
     const exportCSVButton = document.getElementById("export-csv");
+    const reviewButton = document.getElementById("review-quiz");
 
     themeQuestions = await fetchQuestions(selectedTheme);
     displayResults(currentUser, selectedTheme, themeQuestions.length);
@@ -104,7 +138,13 @@ async function initResultsPage() {
     exportCSVButton.addEventListener("click", () => {
         exportCSV(getUserAnswers(currentUser, selectedTheme), `JSQuizStarter_${currentUser}`);
     })
+
+    reviewButton.addEventListener("click", () => {
+        localStorage.setItem("mode", "review");
+        window.location.href = "quiz.html";
+    })
 }
+
 function initStatisticsPage() {
     renderAverageScoreChart();
     renderPlayedGamesChart();
@@ -123,6 +163,7 @@ function seeResults() {
 
 function handleAnswer(isLastQuestion = false) {
     stopTimer();
+
     const checkedInputs = document.querySelectorAll('#options-container input[type="checkbox"]:checked');
     const selectedAnswers = Array.from(checkedInputs).map(input => input.value);
 
@@ -130,20 +171,30 @@ function handleAnswer(isLastQuestion = false) {
     score += correct ? 1 : 0;
 
     showAnswerFeedback(themeQuestions[questionIndex].answers, checkedInputs, correct);
-    saveUserAnswer(currentUser, selectedTheme, themeQuestions[questionIndex].id, selectedAnswers);
+
+    if (mode !== "review") {
+        saveUserAnswer(currentUser, selectedTheme, themeQuestions[questionIndex].id, selectedAnswers);
+    }
 
     if (isLastQuestion) {
-        console.log('we can see results now!');
-        saveScoreDate(currentUser, score, selectedTheme);
-        saveTotalTime(currentUser, selectedTheme, totalTime);
+        if (mode !== "review") {
+            saveScoreDate(currentUser, score, selectedTheme);
+            saveTotalTime(currentUser, selectedTheme, totalTime);
+            saveStatus(currentUser, selectedTheme, 'completed')
+        }
         score = 0;
-        setTimeout(() => window.location.href = 'results.html', 1000);
+        setTimeout(() => {
+            if (mode === "review") {
+                localStorage.setItem("mode", "quiz")
+            }
+            window.location.href = 'results.html';
+        }, 1000);
     } else {
         setTimeout(() => {
             questionIndex++;
             if (questionIndex < themeQuestions.length) {
                 displayQuestion(questionIndex, themeQuestions[questionIndex], themeQuestions.length);
-                startTimer();
+                if (mode !== "review") startTimer();
             }
         }, 1000);
     }
@@ -157,7 +208,7 @@ function startTimer() {
         time--;
 
         if (time < 0) {
-            questionIndex < themeQuestions.length - 1 ? goToNext() : seeResults;
+            questionIndex < themeQuestions.length - 1 ? goToNext() : seeResults();
         } else {
             updateTimerDisplay(time);
         }
@@ -169,4 +220,11 @@ function stopTimer() {
     totalTime += spent;
 
     clearInterval(timer);
+}
+
+function stopQuiz() {
+    saveStatus(currentUser, selectedTheme, 'paused');
+    saveProgressIndex(currentUser, selectedTheme, questionIndex);
+    localStorage.setItem("mode", "quiz");
+    window.location.href = "../index.html"
 }

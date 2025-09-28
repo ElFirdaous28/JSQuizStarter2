@@ -283,18 +283,26 @@
      box-shadow: 0 5px 15px rgba(22, 50, 91, 0.3);
  }
 
- .see-result {
+ .theme-result,
+ .theme-resume,
+ .theme-result:disabled:hover,
+ .theme-resume:disabled:hover {
      background-color: transparent;
      color: #16325B;
      border: 2px solid #16325B;
-     display: none;
  }
 
- .see-result:hover {
+ .theme-result:hover,
+ .theme-resume:hover {
      background-color: #16325B;
      color: white;
      transform: translateY(-2px);
      box-shadow: 0 5px 15px rgba(22, 50, 91, 0.2);
+ }
+
+ .theme-result:disabled,
+ .theme-resume:disabled {
+     cursor: not-allowed;
  }
 
  /* Mobile responsiveness */
@@ -508,13 +516,13 @@
      min-width: 120px;
  }
 
- #stop-test {
+ #stop-quiz {
      background-color: #f8f9fa;
      color: #6c757d;
      border: 2px solid #dee2e6;
  }
 
- #stop-test:hover {
+ #stop-quiz:hover {
      background-color: #e9ecef;
      border-color: #adb5bd;
      color: #495057;
@@ -592,8 +600,8 @@
      justify-content: space-between;
  }
 
- #take-a-quiz {
-     text-decoration: none;
+ #review-quiz {
+     background-color: white;
      padding: 15px 25px;
      border-radius: 12px;
      font-weight: 600;

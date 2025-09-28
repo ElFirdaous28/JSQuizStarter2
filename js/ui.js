@@ -1,4 +1,4 @@
-import { getUsers, getUserAnswers } from './storage.js'
+import { getUsers, getUserAnswers, getUserThemeStatus } from './storage.js'
 import { validateAnswers } from './question.js'
 import { playedGamesPerTheme, averageScorePerTheme, TopThree, averageTimePerTheme } from './statistics.js'
 
@@ -18,10 +18,6 @@ export function hideError() {
     errorElement.style.display = "none";
 }
 
-export function getStartQuizButtons() {
-    return document.querySelectorAll(".start-quiz");
-}
-
 export function displayQuestion(questionIndex, question, length) {
     const nextButton = document.getElementById("next-question");
 
@@ -35,7 +31,7 @@ export function displayQuestion(questionIndex, question, length) {
     // append question Number
     const questionNumberDiv = document.createElement("div");
     questionNumberDiv.className = "question-number";
-    questionNumberDiv.textContent = `Question ${questionIndex + 1}/10`;
+    questionNumberDiv.textContent = `Question ${questionIndex + 1}/${length}`;
     questionsContainer.appendChild(questionNumberDiv);
 
     // append question
@@ -253,8 +249,26 @@ export function displayTopThree() {
     });
 }
 
+export function manageButtonsState(currentUser) {
+    const seeResultsButtons = document.querySelectorAll(".theme-result");
+    const ResumeQuizButtons = document.querySelectorAll(".theme-resume");
+    let theme;
+    seeResultsButtons.forEach((button) => {
+        theme = (button.getAttribute('data-theme'));
+        if (getUserThemeStatus(currentUser, theme) === "completed") {
+            button.disabled = false;
+        }
+    })
 
-// ================================================
+    ResumeQuizButtons.forEach((button) => {
+        theme = (button.getAttribute('data-theme'));
+        if (getUserThemeStatus(currentUser, theme) === "paused") {
+            button.disabled = false;
+        }
+    })
+}
+
+// ============================================== statistics ==============================================
 
 
 export function renderPlayedGamesChart() {
@@ -265,7 +279,7 @@ export function renderPlayedGamesChart() {
     const ctx = document.getElementById('played-games-chart').getContext('2d');
 
     new Chart(ctx, {
-        type: 'doughnut', // or 'doughnut'
+        type: 'doughnut',
         data: {
             labels: labels,
             datasets: [{
