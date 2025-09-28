@@ -1,18 +1,20 @@
 export function saveUser(username) {
-
-    const userInfos = {
-        themes: {
-            "javascript-basics": { answers: [], score: 0, totalTime: 0, dateTime: '', status: 'not-started' },
-            "dom-events": { answers: [], score: 0, totalTime: 0, dateTime: '', status: 'not-started' },
-            "objects-arrays": { answers: [], score: 0, totalTime: 0, dateTime: '', status: 'not-started' }
-        }
-    };
-
     const users = JSON.parse(localStorage.getItem("users")) || {};
-    users[username] = userInfos;
+
+    if (!users[username]) {
+        users[username] = {
+            themes: {
+                "javascript-basics": { answers: [], score: 0, totalTime: 0, dateTime: '', status: 'not-started' },
+                "dom-events": { answers: [], score: 0, totalTime: 0, dateTime: '', status: 'not-started' },
+                "objects-arrays": { answers: [], score: 0, totalTime: 0, dateTime: '', status: 'not-started' }
+            }
+        };
+    }
+
     localStorage.setItem("users", JSON.stringify(users));
     localStorage.setItem("currentUser", username);
 }
+
 
 export function getUsers() {
     return JSON.parse(localStorage.getItem("users")) || {};
@@ -47,13 +49,37 @@ export function saveScoreDate(currentUser, score, selectedTheme) {
     let users = getUsers();
 
     users[currentUser].themes[selectedTheme].score = score;
-    users[currentUser].themes[selectedTheme].status = 'completed';
     users[currentUser].themes[selectedTheme].dateTime = new Date().toISOString();
 
 
     localStorage.setItem("users", JSON.stringify(users));
-
 }
+
+export function saveStatus(currentUser, selectedTheme, status) {
+    let users = getUsers();
+    users[currentUser].themes[selectedTheme].status = status;
+    localStorage.setItem("users", JSON.stringify(users))
+}
+
+export function getUserThemeStatus(user, selectedTheme) {
+    let users = getUsers();
+    return users[user].themes[selectedTheme].status;
+}
+
+export function saveProgressIndex(currentUser, selectedTheme, questionIndex) {
+    let users = getUsers();
+    users[currentUser].themes[selectedTheme].questionIndex = questionIndex;
+    localStorage.setItem("users", JSON.stringify(users))
+}
+
+export function getProgressIndex(currentUser, selectedTheme) {
+    const users = getUsers();
+    if (!users[currentUser]) return null;
+    if (!users[currentUser].themes[selectedTheme]) return null;
+
+    return users[currentUser].themes[selectedTheme].questionIndex ?? 0;
+}
+
 export function saveTotalTime(currentUser, selectedTheme, totalTime) {
     let users = getUsers();
 
