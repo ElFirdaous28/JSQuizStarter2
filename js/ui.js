@@ -18,6 +18,10 @@ export function hideError() {
     errorElement.style.display = "none";
 }
 
+export function displaThemeMode(theme, mode) {
+    document.getElementById("theme-name").textContent = theme;
+    document.getElementById("quiz-mode").textContent = mode;
+}
 export function displayQuestion(questionIndex, question, length) {
     const nextButton = document.getElementById("next-question");
 
@@ -208,8 +212,6 @@ export function displayfeedbacks(currentUser, selectedTheme, themeQuestions) {
 
 export function displayAverageTheme() {
     const data = averageScorePerTheme();
-    // console.log(data);
-
     const boxes = document.querySelectorAll(".average-score");
 
     boxes.forEach(box => {
@@ -217,35 +219,6 @@ export function displayAverageTheme() {
         if (data[theme] !== undefined) {
             box.textContent = data[theme];
         }
-    });
-}
-
-export function displayTopThree() {
-    const data = TopThree();
-    const container = document.getElementById("top-three");
-    container.innerHTML = "";
-
-    data.forEach(user => {
-        const div = document.createElement("div");
-        div.classList.add("top-three-box");
-
-        // first letter
-        const firstLetter = document.createElement("div");
-        firstLetter.classList.add("username-first-letter");
-        firstLetter.textContent = user.username.charAt(0).toUpperCase();
-
-        // username
-        const username = document.createElement("div");
-        username.classList.add("username");
-        username.textContent = user.username.toUpperCase();
-
-        // global score
-        const score = document.createElement("div");
-        score.classList.add("global-score");
-        score.textContent = `${user.globalScore} Points`;
-
-        div.append(firstLetter, username, score);
-        container.appendChild(div);
     });
 }
 
@@ -389,3 +362,38 @@ export function renderTimeSpentChart() {
     });
 }
 
+export function displayTopThree() {
+    const data = TopThree();
+    const container = document.getElementById("top-three");
+    container.innerHTML = "";
+    const positions = ["2nd", "1st", "3rd"];
+    [data[0], data[1]] = [data[1], data[0]]
+
+    data.forEach((user, index) => {
+        const div = document.createElement("div");
+        div.classList.add("top-three-box");
+
+        // position label
+        const posLabel = document.createElement("div");
+        posLabel.classList.add("position-label");
+        posLabel.textContent = positions[index];
+
+        // first letter
+        const firstLetter = document.createElement("div");
+        firstLetter.classList.add("username-first-letter");
+        firstLetter.textContent = user.username.charAt(0).toUpperCase();
+
+        // username
+        const username = document.createElement("div");
+        username.classList.add("username");
+        username.textContent = user.username.toUpperCase();
+
+        // global score
+        const score = document.createElement("div");
+        score.classList.add("global-score");
+        score.textContent = `${user.globalScore} Points`;
+
+        div.append(posLabel, firstLetter, username, score);
+        container.appendChild(div);
+    });
+}

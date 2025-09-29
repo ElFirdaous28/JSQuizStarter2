@@ -3,8 +3,9 @@ import {
     showAnswerFeedback, updateTimerDisplay, displayResults, displayfeedbacks,
     renderAverageScoreChart, displayTopThree, renderPlayedGamesChart, renderTimeSpentChart,
     manageButtonsState,
+    displaThemeMode
 } from './ui.js';
-import { saveUser, saveChoosedTheme, saveUserAnswer, saveScoreDate, saveTotalTime, getUserAnswers, saveStatus, saveProgressIndex, getProgressIndex } from './storage.js';
+import { saveUser, saveChoosedTheme, saveUserAnswer, saveScoreDate, saveTotalTime, getUserAnswers, saveStatus, saveProgressIndex, getProgressIndex, getTotalTime } from './storage.js';
 import { fetchQuestions, validateAnswers } from './question.js';
 import { exportPDF, exportJSON, exportCSV } from './export.js'
 
@@ -101,6 +102,8 @@ async function initQuizPage() {
     seeResultsButton.addEventListener("click", seeResults);
     stopButton.addEventListener("click", stopQuiz);
 
+    displaThemeMode(selectedTheme, mode)
+
     themeQuestions = await fetchQuestions(selectedTheme);
     questionIndex = 0;
 
@@ -114,8 +117,10 @@ async function initQuizPage() {
         });
     }
     else if (mode === "resume") {
+        totalTime = getTotalTime(currentUser, selectedTheme)
         questionIndex = getProgressIndex(currentUser, selectedTheme);
     }
+
     displayQuestion(questionIndex, themeQuestions[questionIndex], themeQuestions.length);
     if (mode !== "review") startTimer();
 }
@@ -159,7 +164,6 @@ function goToNext() {
 function seeResults() {
     handleAnswer(true);
 }
-
 
 function handleAnswer(isLastQuestion = false) {
     stopTimer();
@@ -223,6 +227,8 @@ function stopTimer() {
 }
 
 function stopQuiz() {
+    saveScoreDate(currentUser, score, selectedTheme);
+    saveTotalTime(currentUser, selectedTheme, totalTime);
     saveStatus(currentUser, selectedTheme, 'paused');
     saveProgressIndex(currentUser, selectedTheme, questionIndex);
     localStorage.setItem("mode", "quiz");
