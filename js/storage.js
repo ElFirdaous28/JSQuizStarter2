@@ -80,6 +80,14 @@ export function getProgressIndex(currentUser, selectedTheme) {
     return users[currentUser].themes[selectedTheme].questionIndex ?? 0;
 }
 
+export function getTotalTime(currentUser, selectedTheme) {
+    const users = getUsers();
+    if (!users[currentUser]) return null;
+    if (!users[currentUser].themes[selectedTheme]) return null;
+
+    return users[currentUser].themes[selectedTheme].totalTime ?? 0;
+}
+
 export function saveTotalTime(currentUser, selectedTheme, totalTime) {
     let users = getUsers();
 
