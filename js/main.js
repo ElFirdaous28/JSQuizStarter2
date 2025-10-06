@@ -67,6 +67,8 @@ function initIndexPage() {
 }
 
 function initThemesPage() {
+    localStorage.setItem("mode", "quiz");
+
     const startQuizButtons = document.querySelectorAll(".start-quiz");
     const seeResultsButtons = document.querySelectorAll(".theme-result");
     const ResumeQuizButtons = document.querySelectorAll(".theme-resume");
